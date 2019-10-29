@@ -1,33 +1,21 @@
 const secondPlace = (arr) => {
 
     //First we need to sort our array
-    const sortNumeric = (a, b) => {
-        if (a > b) return 1; 
-        if (a == b) return 0;
-        if (a < b) return -1;
-    }
-
-    let sorted = arr.sort(sortNumeric);
-
+    let sorted = [...arr.sort((a, b) => a - b)];
+    
     //function for comparing 2 elements of array
     //We don't need to output the element that is equal to his lowest or highest sibling by index
-    const compare = (a, b) => {
-        if (a === b) {
-            return false;
-        }
-
-        return true;
-    }
+    const compare = (a, b) => a !== b;
 
     //With this loop we will find out our second lowest element
     let secondLowest = 0;
 
     for (let i = 1; i < sorted.length; i++) {
-        if ( compare(sorted[i], sorted[i - 1]) === false ) {
+        if ( !compare(sorted[i], sorted[i - 1]) ) {
             continue;
         }
   
-        if (compare(sorted[i], sorted[i - 1]) === true) {
+        if (compare(sorted[i], sorted[i - 1])) {
             secondLowest = sorted[i];
             break;
         }
