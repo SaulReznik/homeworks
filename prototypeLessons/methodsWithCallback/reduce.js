@@ -1,4 +1,4 @@
-function reduce (arr, callback, result) {
+Array.prototype.myReduce = function(callback, result) {
     //We must set the value of i conditionaly
     //Thats why we decalring it here
     let i = 0;
@@ -25,5 +25,5 @@ const reducer = (accumulator, currentValue) => {
     return accumulator + currentValue;
 }
 console.log(arr.reduce(reducer));
-console.log(reduce(arr, reducer));
+console.log(arr.myReduce(reducer));
 

@@ -1,6 +1,10 @@
-const find = (arr, callback) => {
+Array.prototype.myFind = function(cb, thisArg) {
     let currentArray = arr;
     let result;
+
+    //If there's passed object with callback
+    //We will bind {this} of callback to that object
+    let callback = cb.bind(thisArg); 
 
     for (let i in arr) {
         let currentValue = arr[i];
@@ -19,13 +23,17 @@ const find = (arr, callback) => {
     return result;
 }
 
-const isBigEnough = (num) => {
-    return num >= 10;
+let obj = {
+    ten: 10
+};
+
+function isBigEnough (num) {
+    return num >= this.ten;
 }
 
 let arr = [1, 2, 3, 13, 5];
 
 
-console.log(arr.find(isBigEnough));
+console.log(arr.find(isBigEnough, obj));
 
-console.log(find(arr, isBigEnough));
+console.log(arr.myFind(isBigEnough, obj));
