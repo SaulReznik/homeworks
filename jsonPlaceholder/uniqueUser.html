@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Unique User To Do Data</title>
+</head>
+<body>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/todos')
+                .then(response => response.json())
+                .then(json => {
+                    const users = json.userId.filter((item, index, arr) => {
+                        const user = JSON.stringify(item);
+
+                        return index === json.item.findIndex(obj => {
+                            return JSON.stringify(obj) === user;
+                        })
+                    });
+                    console.log(users);
+                    
+
+                });    
+    </script>
+</body>
+</html>

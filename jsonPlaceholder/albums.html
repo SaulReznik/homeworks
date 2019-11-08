@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Set the Pictures into Albums</title>
+</head>
+<body>
+    <script>
+        
+        fetch('https://jsonplaceholder.typicode.com/photos')
+                .then(response => response.json())
+                .then(json => {
+                    //Our output array
+                    let albums = [];
+
+                    //Loop trought all the elements of input array
+                    loop: for( let i in json) {
+
+                        //Loop trought all the output array
+                        for(let j in albums) {
+
+                            //if we have at least one picure from the inputs current element
+                            //We will just add the picture to that album
+                            if (albums[j].albumId === json[i].albumId) {
+                                albums[j].pictures.push(json[i].url);
+                                continue loop;
+                            }
+
+                        }
+                        
+                        //If we don't have any pictures from current elements album
+                        //We will add it to our albums array 
+                        //And the current photo as the first photo of that array
+                        albums.push({
+                            albumId: json[i].albumId,
+                            pictures: [json[i].url]
+                        })
+                    }
+                    
+                    console.log(albums)
+                });
+
+    </script>
+</body>
+</html>
