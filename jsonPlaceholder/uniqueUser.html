@@ -8,20 +8,45 @@
 </head>
 <body>
     <script>
-        fetch('https://jsonplaceholder.typicode.com/todos')
+            fetch('https://jsonplaceholder.typicode.com/todos')
                 .then(response => response.json())
                 .then(json => {
-                    const users = json.userId.filter((item, index, arr) => {
-                        const user = JSON.stringify(item);
+                    //Our output array
+                    let todos = [];
 
-                        return index === json.item.findIndex(obj => {
-                            return JSON.stringify(obj) === user;
+                    //Loop trought all the elements of input array
+                    loop: for (let i in json) {
+
+                        //Loop trought all the output array
+                        for (let j in todos) {
+
+                            //if we have at least one todo from the inputs current element
+                            //We will just add the todo to that particular user
+                            if (todos[j].userId === json[i].userId) {
+                                todos[j].titles.push(json[i].title);
+                                //The completed and uncompleted part
+                                if (json[i].completed) {
+                                    todos[j].completed++;
+                                }
+                                todos[j].uncompleted++;
+                                continue loop;
+                            }
+
+                        }
+
+                        //If we don't have any todos from current elements user
+                        //We will add it to our user's array 
+                        //And the current todo as the first todo of that array
+                        todos.push({
+                            userId: json[i].userId,
+                            titles: [json[i].title],
+                            completed: json[i].completed ? 1 : 0,//We will initialized our competed
+                            uncompleted: json[i].completed ? 0 : 1,//And not completed properies for further operations
                         })
-                    });
-                    console.log(users);
-                    
+                    }
 
-                });    
+                    console.log(todos)
+                });   
     </script>
 </body>
 </html>
