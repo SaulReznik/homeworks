@@ -11,8 +11,22 @@
         fetch('https://jsonplaceholder.typicode.com/photos')
                 .then(response => response.json())
                 .then(json => {
-                    const colors = json.map(({ url }) => `#${url.substr(url.length - 6)}`);
-                    console.table(colors);
+                    const colors = json.map(({ url }) => `#${url.slice(url.lastIndexOf('/') + 1)}`);
+                    //const only6 = colors.filter(item => item.length === 7)
+                    
+                    let digits = {};
+
+                    for (let i in colors) {
+
+                        if (digits.hasOwnProperty(colors[i].length)) {
+                            digits[colors[i].length]++;
+                            continue;
+                        }
+
+                        digits[colors[i].length] = 1;
+                    }
+
+                    console.log(digits);
                 });
     </script>
 </body>

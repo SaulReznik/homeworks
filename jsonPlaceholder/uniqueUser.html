@@ -23,11 +23,14 @@
                             //if we have at least one todo from the inputs current element
                             //We will just add the todo to that particular user
                             if (todos[j].userId === json[i].userId) {
+
                                 todos[j].titles.push(json[i].title);
+                                
                                 //The completed and uncompleted part
                                 if (json[i].completed) {
                                     todos[j].completed++;
                                 }
+
                                 todos[j].uncompleted++;
                                 continue loop;
                             }
