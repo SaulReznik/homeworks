@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Even Post Problem</title>
+</head>
+<body>
+    <script>
+        
+        fetch('https://jsonplaceholder.typicode.com/posts')
+                .then(response => response.json())
+                .then(posts => posts.filter(({ userId }) => userId % 2 === 0))//filtering the even {userId}s and returning them for the next {then}
+                .then(even => console.log(even.filter(({ id }) => id % 2 ===0)))//filtering the even {id}s from the filtered array
+
+    </script>
+</body>
+</html>

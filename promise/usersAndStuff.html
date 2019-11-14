@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Users and Stuff</title>
+</head>
+<body>
+    <script>
+
+        //All required URLs
+        const urls = [
+            "https://jsonplaceholder.typicode.com/users",
+            "https://jsonplaceholder.typicode.com/albums",
+            "https://jsonplaceholder.typicode.com/posts"
+        ];
+
+        //fetching URLs with {Promise.all} and combine all it in one array
+        Promise.all(urls.map(url => fetch(url)
+            .then(response => response.json())  
+            ))
+            .then(data => { //Sorting the data like the way we need
+                let result = [];
+
+                //Getting all the albums and posts for each user
+                for(let i in data[0]) {
+                    let uniqueAlbums = data[1].filter(item => data[0][i].id === item.userId);
+                    let uniquePosts = data[2].filter(item => data[0][i].id === item.userId);
+
+                    //Grouping them and sending to the result
+                    result.push({
+                        user: data[0][i],
+                        albums: uniqueAlbums,
+                        posts: uniquePosts
+                    })
+                }
+
+                console.log(result);
+                
+            })
+    </script>
+</body>
+</html>

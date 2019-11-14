@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Albums and their photos</title>
+</head>
+<body>
+    <script>
+        
+        //All required URLs
+            const urls = [
+                "https://jsonplaceholder.typicode.com/albums",
+                "https://jsonplaceholder.typicode.com/photos"
+            ];
+
+            Promise.all(urls.map(url => fetch(url)
+                    .then(response => response.json())
+                ))
+                .then(data => {
+
+                    let result = [];
+
+                    //Getting all {albumId}s
+                    for(let i in data[0]) {
+                        let uniquePhotosURL = [];
+                        
+                        //Getting all photo URLs for each album
+                        for(let j in data[1]){
+                            
+                            if (data[0][i].id === data[1][j].albumId) {
+                                uniquePhotosURL.push(data[1][j].url)
+                            }
+
+                        }
+
+                        result.push({
+                            album: data[0][i],
+                            photos: uniquePhotosURL
+                        })
+                        
+                    }
+
+                    console.log(result);
+                    
+                })
+    </script>
+</body>
+</html>
