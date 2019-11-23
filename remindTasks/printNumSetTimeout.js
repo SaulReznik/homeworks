@@ -9,7 +9,6 @@ function count() {
     if (counter > 20) {
         clearTimeout(timer)
     }
-    
 }
 
 count();

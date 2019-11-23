@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Custom Table</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        body > * {
+            margin: 5px;
+        }
+        input {
+            height: 20px;
+            width: 100px;
+        }
+
+        button {
+            height: 20px;
+            width: fit-content;
+        }
+
+        td {
+            height: 20px
+        }
+    </style>
+</head>
+<body>
+    <label><input type="numeric" id="rows"> :rows</label>
+    <label><input type="numeric" id="columns"> :columns</label>
+
+    <button onclick="createTable()" id="btn">Create</button>
+
+    <table id="dynamic" border="1"></table>
+
+    <script>
+        const createTable = () => {
+            let rows = +document.getElementById('rows').value;
+            let columns = +document.getElementById('columns').value;
+            let table = document.getElementById('dynamic');
+
+            table.innerHTML = "";//clear previous table
+            
+            //Create all rows
+            for (let i = 0; i < rows; i++){
+                let row = table.insertRow('cell');
+
+                //And in row add all columns
+                for(let j = 0; j < columns; j++) {
+                    let cell = row.insertCell('row')
+                }
+
+            }
+            
+        }
+    </script>
+</body>
+</html>

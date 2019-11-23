@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .containers {
+            position: relative;
+            height: 300px;
+            width: 500px;
+            margin: 15px;
+            border: 1px solid black;
+        }
+
+        .bubbles {
+            border-radius: 50%;
+        }
+
+        .bubbles:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="containers" id="bubbleContainer"></div>
+
+    <div class="containers">
+        <span id="text">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Quod aperiam ipsam perspiciatis tempore ratione suscipit explicabo odit provident magnam sint ad,
+            aspernatur adipisci deleniti magni architecto laudantium veniam!
+            Rerum, tenetur.
+        </span>
+    </div>
+    <script>
+
+        let bubbleContainer = document.getElementById('bubbleContainer');//getting the bubble container
+        let text = document.getElementById('text');//And the text field
+
+        //Random number generator (we will need this a lot)
+        const getRandomInt = (min, max) => {
+                return parseInt(Math.random() * (max - min) + min);
+            }
+
+        //Random hexidecimal color generator
+        const getRandomHexidecimalColor = () => {
+            let randomHex = getRandomInt(0, 16).toString(16);//Getting random hexidecimal number
+
+            //Generating 5 of them
+            for (let i = 0; i < 5; i++) {
+                randomHex += getRandomInt(0, 16).toString(16);
+            }
+
+            return `#${randomHex}`;//And returning it with # in the begging
+        }
+
+        //Function where's the magic happens
+        const generateBubbles = (target, min, max) => {
+            target.innerHTML = "";//Clearing all content of the our target container
+
+            //Generating bubbles in the given range
+            for (let i = min; i <= max; i++) {
+                let styles = getComputedStyle(target);//Getting the computed styles
+
+                target.innerHTML += `<div onclick="setColor(this)" class="bubbles" id="div${i}"></div>`;//Bubble HTML structure
+
+                let random = getRandomInt(30, 70);//We will us this radnom number for the bubble size
+                let randomColor = getRandomHexidecimalColor();//Color for bubbles
+
+                let div = document.getElementById(`div${i}`);//Current bubble
+
+                div.style.position = "absolute";//We need this to keep our bubble in the container
+                div.style.height = `${random}px`;//Setting height,
+                div.style.width = `${random}px`;//Width,
+                div.style.backgroundColor = `${randomColor}`;//Background Color,
+                div.style.top = `${getRandomInt(0, parseInt(styles.height) - parseInt(div.style.height))}px`;//And position
+                div.style.left = `${getRandomInt(0, parseInt(styles.width) - parseInt(div.style.width))}px`;
+
+            }
+
+            
+        }
+
+        //Event handler for the text color transformaton
+        const setColor = (parent) => {
+            return text.style.color = parent.style.backgroundColor;
+        }
+
+        //update bubbles every second
+        setInterval(() => generateBubbles(bubbleContainer, 30, 70), 1000);
+
+    </script>
+</body>
+</html>

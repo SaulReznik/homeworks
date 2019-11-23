@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2 Color Text</title>
+    <style>
+        .red{color: red}
+        .blue{color: blue}
+    </style>
+</head>
+<body>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Pariatur sapiente, non cum maxime dolor officiis provident soluta placeat veritatis impedit tenetur repellat quisquam reprehenderit! 
+        Nobis sed commodi quo quod laudantium!
+    </p>
+
+    <script>
+        let p = document.querySelector('p');//Getting the necessary tag with text
+        let words = p.innerText.split(' ');//Extracting words from that string
+
+        p.innerText = "";//Clear our tag from words
+
+        //Setting the odd words to red and even to blue
+        for(let i in words){
+
+            if (i % 2 === 0){
+                p.innerHTML += `<span class='red'>${words[i]} </span>`
+            } else {
+                p.innerHTML += `<span class='blue'>${words[i]} </span>`
+            }
+
+        }
+        
+    </script>
+</body>
+</html>
