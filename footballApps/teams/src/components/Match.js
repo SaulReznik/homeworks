@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import '../App.css'
 
@@ -17,3 +18,11 @@ const Match = props => {
 }
 
 export default Match;
+
+Match.propTypes = {
+    home: PropTypes.string.isRequired,
+    guests: PropTypes.string.isRequired,
+    homeScore: PropTypes.number.isRequired,
+    guestsScore: PropTypes.number.isRequired,
+    goal: PropTypes.func.isRequired
+};
