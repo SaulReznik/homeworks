@@ -1,0 +1,26 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.match-container{
+  margin: 5px;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.name-container {
+  width: 150px;
+  text-align: center;
+}
+
+.score-container {
+  width: 30px;
+  text-align: center;
+}
+
+
+
